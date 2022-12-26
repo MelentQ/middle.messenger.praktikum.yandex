@@ -1,0 +1,17 @@
+@import "../../scss/variables";
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+
+  &__name {
+    font-size: $t-1;
+  }
+
+  &__value {
+    color: $grayscale-700;
+    font-size: $t-1;
+  }
+}

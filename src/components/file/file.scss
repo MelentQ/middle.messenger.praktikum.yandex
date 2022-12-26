@@ -1,0 +1,25 @@
+@import "../../scss/variables";
+
+.file {
+  position: relative;
+
+  &__label {
+    color: $primary-700;
+    font-size: $t-2;
+
+    cursor: pointer;
+
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $primary-900;
+    }
+  }
+
+  &__input {
+    &:focus ~ .file__label {
+      outline: $primary-700 dotted 0.1rem;
+      outline-offset: 0.1rem;
+    }
+  }
+}
