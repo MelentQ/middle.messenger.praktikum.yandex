@@ -7,25 +7,21 @@ class Router {
     this.root = root
     this.routes = {}
 
-    routes.forEach(({ path, template }) => this.route(path, template))
+    routes.forEach(({ path, template }) => {
+      const templateFunction = () => {
+        this.root.innerHTML = template
+      }
+      this.routes[path] = templateFunction.bind(this)
+    })
 
     window.addEventListener('load', this.router.bind(this))
     window.addEventListener('hashchange', this.router.bind(this))
   }
 
-  route(path, template) {
-    const templateFunction = () => {
-      this.root.innerHTML = template
-    }
-    this.routes[path] = templateFunction.bind(this)
-  }
-
   router() {
-    let url = window.location.hash.slice(1) || '/'
-    let route = this.routes[url]
-
-    route()
+    const path = window.location.hash.slice(1) || '/'
+    this.routes[path]()
   }
 }
 
-export { Router }
+export default Router

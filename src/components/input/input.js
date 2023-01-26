@@ -9,8 +9,12 @@ import templateFunction from './input.hbs'
  * @param {String} errorMessage - Input Error Message
  * @returns {String} - Input Element as String
  */
-function input(name, type, placeholder, errorMessage) {
-  return templateFunction({ name, type, placeholder, errorMessage })
+function input({
+  name, type, placeholder, errorMessage,
+}) {
+  return templateFunction({
+    name, type, placeholder, errorMessage,
+  })
 }
 
-export { input }
+export default input

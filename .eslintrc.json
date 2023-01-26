@@ -1,0 +1,16 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "no-unused-vars": 2,
+    "max-len": [2, 100],
+    "max-params": [2, 3],
+    "semi": 0,
+    "no-new": 0,
+    "import/extensions": 0,
+    "import/no-unresolved": 0
+  },
+  "env": {
+    "browser": true,
+    "node": false
+  }
+}

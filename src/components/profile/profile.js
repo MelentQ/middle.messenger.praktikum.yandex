@@ -11,4 +11,4 @@ function profile(head, content) {
   return templateFunction({ head, content })
 }
 
-export { profile }
+export default profile

@@ -10,4 +10,4 @@ function name(text) {
   return templateFunction({ text })
 }
 
-export { name }
+export default name

@@ -11,4 +11,4 @@ function button(type, label) {
   return templateFunction({ type, label })
 }
 
-export { button }
+export default button

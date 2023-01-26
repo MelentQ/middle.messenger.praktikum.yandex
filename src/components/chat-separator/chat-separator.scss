@@ -1,0 +1,13 @@
+@import "../../scss/variables";
+
+.chat-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem 0;
+
+  color: $grayscale-700;
+
+  font-size: $t-2;
+}

@@ -3,13 +3,13 @@ import templateFunction from './link.hbs'
 
 /**
  * Handlebars Link Template
- * @param {String} link - Link
+ * @param {String} href - Link href
  * @param {String} text - Link Text
  * @param {String} mods - Link CSS Mods
  * @returns {String} - Link Element as String
  */
-function link(link, text, mods = '') {
-  return templateFunction({ link, text, mods })
+function link(href, text, mods = '') {
+  return templateFunction({ href, text, mods })
 }
 
-export { link }
+export default link

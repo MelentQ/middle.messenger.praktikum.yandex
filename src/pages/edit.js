@@ -1,22 +1,32 @@
-import { profile } from '../components/profile/profile'
-import { avatar } from '../components/avatar/avatar'
-import { list } from '../components/list/list'
-import { back } from '../components/back/back'
-import { button } from '../components/button/button'
-import { field } from '../components/field/field'
+import profile from '../components/profile/profile'
+import avatar from '../components/avatar/avatar'
+import list from '../components/list/list'
+import back from '../components/back/back'
+import button from '../components/button/button'
+import field from '../components/field/field'
 
-let editProfilePage = profile(avatar('Edit Avatar'), [
+const editProfilePage = profile(avatar('Edit Avatar'), [
   list([
-    field('0', 'E-mail', 'email', 'email', 'mejleht@yandex.ru'),
-    field('1', 'Login', 'login', 'email', 'mejleht'),
-    field('2', 'First Name', 'first_name', 'email', 'Danil'),
-    field('3', 'Second Name', 'second_name', 'email', 'Melentev'),
-    field('4', 'Display Name', 'display_name', 'email', 'Danil'),
-    field('5', 'Phone', 'phone', 'email', '+7 (999) 999 99 99'),
+    field({
+      id: '0', label: 'E-mail', name: 'email', type: 'email', value: 'mejleht@yandex.ru',
+    }),
+    field({
+      id: '1', label: 'Login', name: 'login', type: 'text', value: 'mejleht',
+    }),
+    field({
+      id: '2', label: 'First Name', name: 'first_name', type: 'text', value: 'Danil',
+    }),
+    field({
+      id: '3', label: 'Second Name', name: 'second_name', type: 'text', value: 'Melentev',
+    }),
+    field({
+      id: '4', label: 'Display Name', name: 'display_name', type: 'text', value: 'Danil',
+    }),
+    field({
+      id: '5', label: 'Phone', name: 'phone', type: 'tel', value: '+7 (999) 999 99 99',
+    }),
   ]),
   button('button', 'Save'),
-])
-const backLink = back('#/')
-editProfilePage += backLink
+]) + back('#/')
 
-export { editProfilePage }
+export default editProfilePage

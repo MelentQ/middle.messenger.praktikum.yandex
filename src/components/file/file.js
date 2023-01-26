@@ -12,4 +12,4 @@ function file(id, label, name) {
   return templateFunction({ id, label, name })
 }
 
-export { file }
+export default file

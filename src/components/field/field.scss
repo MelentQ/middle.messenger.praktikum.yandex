@@ -7,17 +7,20 @@
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translateY(-50%);
 
     font-size: $t-1;
+
+    transform: translateY(-50%);
   }
 
   &__input {
     width: 100%;
     padding: 0 0 0 10rem;
-    border: 0;
-    text-align: right;
+
     color: $grayscale-700;
     font-size: $t-1;
+    text-align: right;
+
+    border: 0;
   }
 }

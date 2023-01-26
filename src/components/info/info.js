@@ -11,4 +11,4 @@ function info(name, value) {
   return templateFunction({ name, value })
 }
 
-export { info }
+export default info

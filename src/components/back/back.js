@@ -10,4 +10,4 @@ function back(link) {
   return templateFunction({ link })
 }
 
-export { back }
+export default back

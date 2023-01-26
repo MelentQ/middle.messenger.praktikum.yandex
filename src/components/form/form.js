@@ -11,4 +11,4 @@ function form(inputs, actions) {
   return templateFunction({ inputs, actions })
 }
 
-export { form }
+export default form

@@ -1,12 +1,12 @@
-import { profile } from '../components/profile/profile'
-import { avatar } from '../components/avatar/avatar'
-import { name } from '../components/name/name'
-import { list } from '../components/list/list'
-import { info } from '../components/info/info'
-import { link } from '../components/link/link'
-import { back } from '../components/back/back'
+import profile from '../components/profile/profile'
+import avatar from '../components/avatar/avatar'
+import name from '../components/name/name'
+import list from '../components/list/list'
+import info from '../components/info/info'
+import link from '../components/link/link'
+import back from '../components/back/back'
 
-let profilePage = profile(avatar('Edit Avatar') + name('Danil'), [
+const profilePage = profile(avatar('Edit Avatar') + name('Danil'), [
   list([
     info('E-mail', 'mejleht@yandex.ru'),
     info('Login', 'mejleht'),
@@ -20,8 +20,6 @@ let profilePage = profile(avatar('Edit Avatar') + name('Danil'), [
     link('#/edit-password', 'Change Password'),
     link('#/', 'Logout', '--color-red'),
   ]),
-])
-const backLink = back('#/')
-profilePage += backLink
+]) + back('#/')
 
-export { profilePage }
+export default profilePage

@@ -1,22 +1,21 @@
 @import "../../scss/variables";
 
 .link {
+  color: inherit;
+  font-size: $t-3;
   text-align: center;
   text-decoration: none;
-  color: inherit;
-
-  font-size: $t-3;
 
   transition: color 0.3s;
 
   &.--color-red {
     &:link,
     &:visited {
-      color: #FF0000;
+      color: #f00;
     }
 
     &:hover {
-      color: #B20000;
+      color: #b20000;
     }
   }
 

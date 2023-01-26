@@ -1,18 +1,19 @@
 @import "../../scss/variables";
 
 .button {
-  border: none;
   padding: 1.2rem 7rem;
-  background-color: $primary-700;
-  border-radius: 0.8rem;
-  color: white;
 
+  color: white;
   font-size: $t-1;
 
-  user-select: none;
+  background-color: $primary-700;
+  border: none;
+  border-radius: 0.8rem;
   cursor: pointer;
 
   transition: background-color 0.3s;
+
+  user-select: none;
 
   &:hover {
     background-color: $primary-900;

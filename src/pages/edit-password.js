@@ -1,19 +1,27 @@
-import { profile } from '../components/profile/profile'
-import { avatar } from '../components/avatar/avatar'
-import { list } from '../components/list/list'
-import { back } from '../components/back/back'
-import { button } from '../components/button/button'
-import { field } from '../components/field/field'
+import profile from '../components/profile/profile'
+import avatar from '../components/avatar/avatar'
+import list from '../components/list/list'
+import back from '../components/back/back'
+import button from '../components/button/button'
+import field from '../components/field/field'
 
-let editPasswordPage = profile(avatar('Edit Avatar'), [
+const editPasswordPage = profile(avatar('Edit Avatar'), [
   list([
-    field('0', 'Old Password', 'oldPassword', 'password', '123456'),
-    field('1', 'New Password', 'newPassword', 'password', 'qwerty'),
-    field('2', 'Password Confirmation', 'password_confirmation', 'password', 'qwerty'),
+    field({
+      id: '0', label: 'Old Password', name: 'oldPassword', type: 'password', value: '123456',
+    }),
+    field({
+      id: '1', label: 'New Password', name: 'newPassword', type: 'password', value: 'qwerty',
+    }),
+    field({
+      id: '2',
+      label: 'Password Confirmation',
+      name: 'password_confirmation',
+      type: 'password',
+      value: 'qwerty',
+    }),
   ]),
   button('button', 'Save'),
-])
-const backLink = back('#/')
-editPasswordPage += backLink
+]) + back('#/')
 
-export { editPasswordPage }
+export default editPasswordPage

@@ -10,4 +10,4 @@ function list(items) {
   return templateFunction({ items })
 }
 
-export { list }
+export default list

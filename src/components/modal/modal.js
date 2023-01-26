@@ -12,4 +12,4 @@ function modal(title, content, actions) {
   return templateFunction({ title, content, actions })
 }
 
-export { modal }
+export default modal

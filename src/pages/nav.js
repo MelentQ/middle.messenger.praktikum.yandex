@@ -1,6 +1,6 @@
-import { window } from '../components/window/window'
-import { link } from '../components/link/link'
-import { list } from '../components/list/list'
+import window from '../components/window/window'
+import link from '../components/link/link'
+import list from '../components/list/list'
 
 const links = list([
   link('#/login', 'Login Page'),
@@ -15,4 +15,4 @@ const links = list([
 ])
 const windowWrapper = window('Pages', links)
 
-export { windowWrapper as navPage }
+export default windowWrapper

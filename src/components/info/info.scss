@@ -2,9 +2,9 @@
 
 .info {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
 
   &__name {
     font-size: $t-1;

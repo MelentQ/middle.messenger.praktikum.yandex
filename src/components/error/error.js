@@ -12,4 +12,4 @@ function error(code, text, actions) {
   return templateFunction({ code, text, actions })
 }
 
-export { error }
+export default error

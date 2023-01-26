@@ -10,8 +10,12 @@ import templateFunction from './field.hbs'
  * @param {String} value - Field Value
  * @returns {String} - Field Element as String
  */
-function field(id, label, name, type, value = null) {
-  return templateFunction({ id, label, name, type, value })
+function field({
+  id, label, name, type, value = null,
+}) {
+  return templateFunction({
+    id, label, name, type, value,
+  })
 }
 
-export { field }
+export default field

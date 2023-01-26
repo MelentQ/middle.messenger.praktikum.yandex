@@ -10,4 +10,4 @@ function avatar(label) {
   return templateFunction({ label })
 }
 
-export { avatar }
+export default avatar

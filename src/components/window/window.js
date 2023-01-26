@@ -11,4 +11,4 @@ function window(title, content) {
   return templateFunction({ title, content })
 }
 
-export { window }
+export default window

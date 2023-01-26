@@ -9,32 +9,38 @@
     position: absolute;
     top: 1.5rem;
     left: 0;
+
+    color: $grayscale-700;
+
     transform: translateY(-1.5rem);
     transform-origin: left top;
 
-    color: $grayscale-700;
-    pointer-events: none;
-    user-select: none;
-
     transition: transform 0.3s ease;
+
+    user-select: none;
+    pointer-events: none;
   }
 
   &__element {
     width: 100%;
     padding: 1.5rem 0 0.7rem;
+
     border: none;
     border-bottom: 0.1rem solid $primary-700;
 
     transition: border-color 0.3s;
 
     &::placeholder {
-      opacity: 0;
       visibility: hidden;
+      opacity: 0;
+
       pointer-events: none;
     }
+
     &:placeholder-shown ~ .input__placeholder {
       transform: translateY(0) scale(1.44);
     }
+
     &:focus ~ .input__placeholder {
       transform: translateY(-1.5rem);
     }
@@ -46,12 +52,12 @@
 
   &__message {
     position: absolute;
-    left: 0;
     bottom: -1.5rem;
+    left: 0;
 
     color: $error;
-    font-size: $l-2;
     font-weight: 400;
+    font-size: $l-2;
 
     user-select: none;
   }

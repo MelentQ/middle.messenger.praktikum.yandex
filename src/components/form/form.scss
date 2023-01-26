@@ -1,12 +1,11 @@
 @import "../../scss/variables";
 
 .form {
-  flex-grow: 1;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  flex-grow: 1;
   gap: 6rem;
+  justify-content: space-between;
 
   &__inputs {
     display: flex;
