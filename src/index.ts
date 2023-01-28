@@ -1,8 +1,8 @@
-import './scss/global.scss'
+import './scss/global.scss';
 
-import Router from './utils/router'
-import { root } from './utils/constants'
-// import navPage from './pages/nav'
+import Router from './utils/router';
+import { root } from './utils/constants';
+import navPage from './pages/nav';
 // import loginPage from './pages/login'
 // import registrationPage from './pages/registration'
 // import serverErrorPage from './pages/500'
@@ -13,7 +13,9 @@ import { root } from './utils/constants'
 // import editPasswordPage from './pages/edit-password'
 // import modal from './pages/modal'
 
-new Router(root, [])
+new Router(root, [
+  { path: '/', template: navPage },
+]);
 
 // new Router(root, [
 //   { path: '/', template: navPage },
