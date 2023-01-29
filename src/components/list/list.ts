@@ -3,17 +3,15 @@ import templateFunction from './list.hbs';
 import { Block } from '../../utils/Block';
 
 type ListProps = {
-  items: string[],
-  attr?: {[attributeName: string]: string},
+  items: Block[]
 }
 
 class List extends Block<ListProps> {
-  constructor(props: ListProps) {
-    super(props, 'ul');
+  constructor(props: ListProps, events: { [p: string]: Function } = {}) {
+    super('ul', props, { class: 'list' }, events);
   }
-
   render() {
-    return templateFunction(this.props);
+    return this.compile(templateFunction);
   }
 }
 

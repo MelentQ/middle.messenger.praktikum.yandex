@@ -1,3 +1,5 @@
+import { Block } from './Block';
+
 interface IRouter {
   root: HTMLElement,
   _routes: { [path: string]: Function },
@@ -13,7 +15,7 @@ class Router implements IRouter {
 
   _routes: { [path: string]: Function };
 
-  constructor(root: HTMLElement | null, routes: { path: string, template: HTMLElement }[]) {
+  constructor(root: HTMLElement | null, routes: { path: string, component: Block }[]) {
     if (root === null) {
       throw new Error('root is null');
     }
@@ -21,9 +23,9 @@ class Router implements IRouter {
     this.root = root;
     this._routes = {};
 
-    routes.forEach(({ path, template }) => {
+    routes.forEach(({ path, component }) => {
       const templateFunction = () => {
-        this.root.append(template);
+        this.root.append(component.getContent());
       };
       this._routes[path] = templateFunction.bind(this);
     });

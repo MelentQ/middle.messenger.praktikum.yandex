@@ -5,19 +5,16 @@ import { Block } from '../../utils/Block';
 // events
 type WindowProps = {
   title: string, // props
-  content?: Block | string, // props
-  attr?: {[attributeName: string]: string}, // Атрибуты обёртки
-  events?: {[eventName: string]: Function}, // События
-  settings?: {withInternalID: boolean} // Настройки
+  content: Block | string, // props
 }
 
 class Window extends Block<WindowProps> {
-  constructor(props: WindowProps) {
-    super(props, 'div');
+  constructor(props: WindowProps, events: { [p: string]: Function } = {}) {
+    super('div', props, { class: 'window' }, events);
   }
 
   render() {
-    return templateFunction(this.props);
+    return this.compile(templateFunction);
   }
 }
 

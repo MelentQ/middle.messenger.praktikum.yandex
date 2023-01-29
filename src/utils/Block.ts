@@ -3,7 +3,7 @@ import { EventBus } from './EventBus';
 import { Utils } from './Utils';
 
 type BlockSettings = {
-  withInternalID: boolean
+  withInternalID?: boolean
 }
 
 abstract class Block<T extends object = {}> {
@@ -16,45 +16,40 @@ abstract class Block<T extends object = {}> {
 
   meta: {
     tagName: string;
-    props: T;
-    children: { [key: string]: Block };
+    propsAndChildren: T | {[p: string]: Block | Block[]};
     attr: { [p: string]: string };
     events: { [p: string]: Function };
     settings: BlockSettings;
   };
 
+  props: T;
+  children: {[p: string]: Block | Block[]};
+
   eventBus: () => EventBus;
 
   _id: string = makeUUID();
-  _element: HTMLElement | null = null;
+  _element: HTMLElement;
 
   _isReadyToUpdateProps = false;
 
-  protected constructor(
-    tagName: string,
-    props: T,
-    children: { [p: string]: Block },
-    attr: { [p: string]: string },
-    events: { [p: string]: Function },
-    settings: BlockSettings,
+  constructor(
+    tagName: string = 'div',
+    propsAndChildren: T = {} as T, // Как сделать нормально?
+    attr: { [p: string]: string } = {},
+    events: { [p: string]: Function } = {},
+    settings: BlockSettings = {},
   ) {
     this.meta = {
       tagName,
-      props,
-      children,
+      propsAndChildren,
       attr,
       events,
       settings,
     };
 
-    // Подменяем чилдов на заглушки
-    Object.entries(this.meta.children).forEach(([key, child]) => {
-      // @ts-ignore
-      this.meta.props[key] = `<div data-id='${child._id}'></div>`;
-    });
-
     // @ts-ignore
-    this.props = this._makePropsProxy({ ...this.meta.props, __id: this._id });
+    this.props = this._makePropsProxy({ ...this.meta.propsAndChildren, __id: this._id });
+    this.children = this._separateChildren(this.meta.propsAndChildren);
 
     const eventBus = new EventBus();
     this.eventBus = () => eventBus;
@@ -63,22 +58,23 @@ abstract class Block<T extends object = {}> {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _separatePropsAndChildren(propsAndChildren: T): {
-    children: { [key: string]: Block },
-    props: { [key: string]: string }
-  } {
-    const children: { [key: string]: Block } = {};
-    const props: { [key: string]: string } = {};
+  _separateChildren(
+    propsAndChildren: T | {[p: string]: Block | Block[]},
+  ): {[p: string]: Block | Block[]} {
+    const children: {[p: string]: Block | Block[]} = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
-      if (value instanceof Block) {
+      if (Array.isArray(value)) {
+        const childrenArray = value.filter((item) => item instanceof Block);
+        if (childrenArray.length) {
+          children[key] = childrenArray;
+        }
+      } else if (value instanceof Block) {
         children[key] = value;
-      } else {
-        props[key] = value;
       }
     });
 
-    return { children, props };
+    return children;
   }
 
   _registerEvents(eventBus: EventBus) {
@@ -89,7 +85,7 @@ abstract class Block<T extends object = {}> {
   }
 
   _createResources() {
-    this._element = Utils.createDocumentElement(this.tagName);
+    this._element = Utils.createDocumentElement(this.meta.tagName);
   }
 
   init() {
@@ -99,9 +95,20 @@ abstract class Block<T extends object = {}> {
 
   _componentDidMount() {
     this.componentDidMount();
+
+    Object.values(this.children).forEach((child) => {
+      if (Array.isArray(child)) {
+        child.forEach((c) => {
+          c.dispatchComponentDidMount();
+        });
+      } else {
+        child.dispatchComponentDidMount();
+      }
+    });
   }
 
   componentDidMount() {
+    console.log('Component mounted: ', this.constructor.name);
   }
 
   dispatchComponentDidMount() {
@@ -118,8 +125,6 @@ abstract class Block<T extends object = {}> {
 
   componentDidUpdate(oldProps: T, newProps: T): boolean {
     console.log(oldProps, newProps);
-    // @ts-ignore
-    // return !Utils.compareObjects(oldProps, newProps);
 
     return true;
   }
@@ -129,73 +134,81 @@ abstract class Block<T extends object = {}> {
   }
 
   _addAttribute() {
-    // @ts-ignore
-    const { attr = {} } = this.props;
-    if (this._element) {
-      // @ts-ignore
-      if (this.props.settings?.withInternalID) {
-        this._element.setAttribute('data-id', this._id);
-      }
-
-      const fragment = this._element;
-
-      Object.entries(attr).forEach(([key, attribute]) => {
-        fragment.setAttribute(key, attribute as string);
-      });
+    if (this.meta.settings.withInternalID) {
+      this._element.setAttribute('data-id', this._id);
     }
+
+    Object.entries(this.meta.attr).forEach(([name, value]) => {
+      this._element.setAttribute(name, value);
+    });
   }
 
   _addEvents() {
-    // @ts-ignore
-    const { events = {} } = this.props;
-
-    Object.keys(events).forEach((eventName) => {
+    Object.entries(this.meta.events).forEach(([name, event]) => {
       // @ts-ignore
-      this._element.addEventListener(eventName, events[eventName]);
+      this._element.addEventListener(name, event);
     });
   }
 
   _removeEvents() {
-    // @ts-ignore
-    const { events = {} } = this.props;
-
-    Object.keys(events).forEach((eventName) => {
+    Object.entries(this.meta.events).forEach(([name, event]) => {
       // @ts-ignore
-      this._element.removeEventListener(eventName, events[eventName]);
+      this._element.removeEventListener(name, event);
     });
   }
 
-  _render() {
-    if (this._element === null) {
-      throw new Error('Element is null');
-    }
-    console.log('render: ', this.constructor.name);
+  compile(templateFunction: Function): DocumentFragment {
+    const propsAndStubs = { ...this.props };
 
-    this._removeEvents();
-    this._element.innerHTML = this.render();
-    this._addAttribute();
-
-    const fragment = this._element;
-    Object.values(this.children).forEach((child) => {
-      // @ts-ignore
-      const stub = fragment.querySelector(`[data-id="${child._id}"]`);
-      if (stub) {
-        stub.replaceWith(child.getContent());
+    Object.entries(this.children).forEach(([key, child]) => {
+      if (Array.isArray(child)) {
+        child.forEach((c, i) => {
+          // @ts-ignore
+          propsAndStubs[key][i] = `<div data-id='${c._id}'></div>`;
+        });
+      } else {
+        // @ts-ignore
+        propsAndStubs[key] = `<div data-id='${child._id}'></div>`;
       }
     });
 
+    // @ts-ignore
+    const fragment: HTMLTemplateElement = Utils.createDocumentElement('template');
+
+    fragment.innerHTML = templateFunction(propsAndStubs);
+
+    Object.values(this.children).forEach((child) => {
+      if (Array.isArray(child)) {
+        child.forEach((c) => {
+          const placeholder = fragment.content.querySelector(`[data-id="${c._id}"]`);
+          placeholder!.replaceWith(c.getContent());
+        });
+      } else {
+        const placeholder = fragment.content.querySelector(`[data-id="${child._id}"]`);
+        placeholder!.replaceWith(child.getContent());
+      }
+    });
+
+    return fragment.content;
+  }
+
+  _render() {
+    console.log('render: ', this.constructor.name);
+
+    this._removeEvents();
+    this._element.innerHTML = '';
+
+    this._element.appendChild(this.render());
+    this._addAttribute();
     this._addEvents();
   }
 
   // Переопределяется пользователем. Необходимо вернуть разметку
-  render(): string {
-    return '';
+  render(): DocumentFragment {
+    return document.createDocumentFragment();
   }
 
   getContent(): HTMLElement {
-    if (this.element === null) {
-      throw new Error('Element is null');
-    }
     return this.element;
   }
 
@@ -208,8 +221,11 @@ abstract class Block<T extends object = {}> {
 
     this._isReadyToUpdateProps = false;
 
-    // todo: Сделать то же самое с чилдами
+    // В this.props уже есть загрушки children
     Object.assign(this.props, nextProps);
+
+    // Обновляем список чилдов
+    this.children = this._separateChildren(this.props);
 
     if (this._isReadyToUpdateProps) {
       this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, this.props);
@@ -227,7 +243,6 @@ abstract class Block<T extends object = {}> {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target: T, prop, value) {
-        // todo: тут нет проверки на массив
         // @ts-ignore
         if (target[prop] !== value) {
           self._isReadyToUpdateProps = true;
