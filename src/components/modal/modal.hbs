@@ -1,11 +1,13 @@
-<div class="modal">
-    <div class="modal__window">
-        <h2 class="modal__title">{{title}}</h2>
-        <div class="modal__content">
-            {{{content}}}
-        </div>
-        <div class="modal__actions">
-            {{{actions}}}
-        </div>
-    </div>
+<div class="modal__window">
+  <h2 class="modal__title">{{title}}</h2>
+  <div class="modal__content">
+    {{#each content}}
+      {{{this}}}
+    {{/each}}
+  </div>
+  <div class="modal__actions">
+    {{#each actions}}
+      {{{this}}}
+    {{/each}}
+  </div>
 </div>

@@ -25,6 +25,7 @@ class Router implements IRouter {
 
     routes.forEach(({ path, component }) => {
       const templateFunction = () => {
+        this.root.innerHTML = '';
         this.root.append(component.getContent());
       };
       this._routes[path] = templateFunction.bind(this);

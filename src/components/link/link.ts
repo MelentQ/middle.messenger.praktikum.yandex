@@ -10,7 +10,9 @@ type LinkProps = {
 
 class Link extends Block {
   constructor(props: LinkProps, events: { [p: string]: Function } = {}) {
-    super('a', props, { class: 'link', href: props.href }, events);
+    const linkClass = props.mods ? `link ${props.mods}` : 'link';
+
+    super('a', props, { class: linkClass, href: props.href }, events);
   }
 
   render() {

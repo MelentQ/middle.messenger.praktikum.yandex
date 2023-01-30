@@ -3,7 +3,7 @@ import templateFunction from './list.hbs';
 import { Block } from '../../utils/Block';
 
 type ListProps = {
-  items: Block[]
+  items: Block[] | string[]
 }
 
 class List extends Block<ListProps> {

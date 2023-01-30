@@ -3,29 +3,25 @@ import './scss/global.scss';
 import Router from './utils/router';
 import { root } from './utils/constants';
 import navPage from './pages/navPage';
-// import loginPage from './pages/login'
-// import registrationPage from './pages/registration'
-// import serverErrorPage from './pages/500'
-// import notFoundErrorPage from './pages/404'
-// import chatPage from './pages/chat'
-// import profilePage from './pages/profile'
-// import editProfilePage from './pages/edit'
-// import editPasswordPage from './pages/edit-password'
-// import modal from './pages/modal'
+import loginPage from './pages/loginPage';
+import registrationPage from './pages/registrationPage';
+import notFoundErrorPage from './pages/notFoundErrorPage';
+import serverErrorPage from './pages/serverErrorPage';
+import chatPage from './pages/chatPage';
+import profilePage from './pages/profilePage';
+import editProfilePage from './pages/editProfilePage';
+import editPasswordPage from './pages/editPasswordPage';
+import modal from './pages/modal';
 
 new Router(root, [
   { path: '/', component: navPage },
+  { path: '/login', component: loginPage },
+  { path: '/registration', component: registrationPage },
+  { path: '/404', component: notFoundErrorPage },
+  { path: '/500', component: serverErrorPage },
+  { path: '/chat', component: chatPage },
+  { path: '/profile', component: profilePage },
+  { path: '/edit', component: editProfilePage },
+  { path: '/edit-password', component: editPasswordPage },
+  { path: '/modal', component: modal },
 ]);
-
-// new Router(root, [
-//   { path: '/', template: navPage },
-//   { path: '/login', template: loginPage },
-//   { path: '/registration', template: registrationPage },
-//   { path: '/404', template: notFoundErrorPage },
-//   { path: '/500', template: serverErrorPage },
-//   { path: '/chat', template: chatPage },
-//   { path: '/profile', template: profilePage },
-//   { path: '/edit', template: editProfilePage },
-//   { path: '/edit-password', template: editPasswordPage },
-//   { path: '/modal', template: modal },
-// ])
