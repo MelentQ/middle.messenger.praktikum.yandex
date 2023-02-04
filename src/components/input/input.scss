@@ -21,6 +21,24 @@
     pointer-events: none;
   }
 
+  &__message {
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+
+    color: $error;
+    font-weight: 400;
+    font-size: $l-2;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    user-select: none;
+  }
+
   &__element {
     width: 100%;
     padding: 1.5rem 0 0.7rem;
@@ -53,23 +71,5 @@
     &:hover {
       border-color: $primary-900;
     }
-  }
-
-  &__message {
-    position: absolute;
-    bottom: -1.5rem;
-    left: 0;
-
-    color: $error;
-    font-weight: 400;
-    font-size: $l-2;
-
-    visibility: hidden;
-
-    opacity: 0;
-
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-
-    user-select: none;
   }
 }
