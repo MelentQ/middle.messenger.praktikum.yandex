@@ -2,10 +2,9 @@ import './window.scss';
 import templateFunction from './window.hbs';
 import { Block } from '../../utils/Block';
 
-// events
 type WindowProps = {
-  title: string, // props
-  content: Block | string, // props
+  title: string,
+  content: Block | string,
 }
 
 class Window extends Block<WindowProps> {

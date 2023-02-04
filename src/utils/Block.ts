@@ -143,17 +143,17 @@ abstract class Block<T extends object = {}> {
     });
   }
 
-  _addEvents() {
+  addEvents() {
     Object.entries(this.meta.events).forEach(([name, event]) => {
       // @ts-ignore
-      this._element.addEventListener(name, event);
+      this._element.addEventListener(name, event.bind(this));
     });
   }
 
-  _removeEvents() {
+  removeEvents() {
     Object.entries(this.meta.events).forEach(([name, event]) => {
       // @ts-ignore
-      this._element.removeEventListener(name, event);
+      this._element.removeEventListener(name, event.bind(this));
     });
   }
 
@@ -193,14 +193,14 @@ abstract class Block<T extends object = {}> {
   }
 
   _render() {
-    console.log('render: ', this.constructor.name);
+    // console.log('render: ', this.constructor.name);
 
-    this._removeEvents();
+    this.removeEvents();
     this._element.innerHTML = '';
 
     this._element.appendChild(this.render());
     this._addAttribute();
-    this._addEvents();
+    this.addEvents();
   }
 
   // Переопределяется пользователем. Необходимо вернуть разметку

@@ -30,6 +30,11 @@
 
     transition: border-color 0.3s;
 
+    &.invalid ~ .input__message {
+      visibility: visible;
+      opacity: 1;
+    }
+
     &::placeholder {
       visibility: hidden;
       opacity: 0;
@@ -58,6 +63,12 @@
     color: $error;
     font-weight: 400;
     font-size: $l-2;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 
     user-select: none;
   }

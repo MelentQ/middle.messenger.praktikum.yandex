@@ -5,7 +5,7 @@ import { Block } from '../../utils/Block';
 type ErrorProps = {
   code: string,
   text: string,
-  actions: Block[]
+  actions: Block[] | string[]
 }
 
 class Error extends Block<ErrorProps> {

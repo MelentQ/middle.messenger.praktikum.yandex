@@ -22,5 +22,9 @@
     text-align: right;
 
     border: 0;
+
+    &.invalid {
+      outline: #b20000 0.1rem solid;
+    }
   }
 }

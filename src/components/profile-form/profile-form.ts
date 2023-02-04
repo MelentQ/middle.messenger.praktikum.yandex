@@ -1,20 +1,22 @@
-import './form.scss';
-import templateFunction from './form.hbs';
+import './profile.scss';
+import templateFunction from './profile.hbs';
 import { Block } from '../../utils/Block';
 import { Input } from '../input';
 
-type FormProps = {
-  inputs: Input[],
-  actions: Block[] | string[]
+type ProfileFormProps = {
+  head: Block[] | string[],
+  content: Block[] | string[],
+  isForm?: boolean
 }
 
-class Form extends Block<FormProps> {
-  constructor(props: FormProps, events: { [p: string]: Function } = {}) {
-    super('form', props, { class: 'form', novalidate: 'true' }, events);
+class ProfileForm extends Block<ProfileFormProps> {
+  constructor(props: ProfileFormProps, events: { [p: string]: Function } = {}) {
+    super('form', props, { class: 'profile', novalidate: 'true' }, events);
   }
 
   getFormData(): Record<string, string> {
-    return (this.children.inputs as Input[])
+    // @ts-ignore
+    return (this.children.content[0].children.items as Input[])
       .reduce((acc: Record<string, string>, inputComponent) => {
         if (inputComponent.inputElement) {
           acc[inputComponent.inputElement.name] = inputComponent.inputElement.value;
@@ -24,7 +26,8 @@ class Form extends Block<FormProps> {
   }
 
   checkValidity(): boolean {
-    (this.children.inputs as Input[]).forEach((inputComponent) => {
+    // @ts-ignore
+    (this.children.content[0].children.items as Input[]).forEach((inputComponent) => {
       inputComponent.checkValidity();
     });
 
@@ -35,7 +38,8 @@ class Form extends Block<FormProps> {
     const confirmationInputNames: string[] = [];
     const mask = /.*_confirmation/;
 
-    (this.children.inputs as Input[]).forEach((inputComponent) => {
+    // @ts-ignore
+    (this.children.content[0].children.items as Input[]).forEach((inputComponent) => {
       if (inputComponent.inputElement && mask.test(inputComponent.inputElement.name)) {
         confirmationInputNames.push(inputComponent.inputElement.name.replace('_confirmation', ''));
       }
@@ -56,4 +60,4 @@ class Form extends Block<FormProps> {
   }
 }
 
-export { Form };
+export { ProfileForm };

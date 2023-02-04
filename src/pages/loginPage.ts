@@ -3,6 +3,15 @@ import { Form } from '../components/form';
 import { Input } from '../components/input';
 import { Button } from '../components/button';
 import { Link } from '../components/link';
+import { patterns } from '../utils/constants';
+
+function onSubmit(e: SubmitEvent) {
+  e.preventDefault();
+  const isValid = this.checkValidity();
+  if (isValid) {
+    console.log(this.getFormData());
+  }
+}
 
 const loginPage = new Window({
   title: 'Sign In',
@@ -13,12 +22,16 @@ const loginPage = new Window({
         type: 'text',
         placeholder: 'Login',
         errorMessage: 'Incorrect Login',
+        required: true,
+        pattern: patterns.login,
       }),
       new Input({
         name: 'password',
         type: 'password',
         placeholder: 'Password',
         errorMessage: 'Incorrect Password',
+        required: true,
+        pattern: patterns.password,
       }),
     ],
     actions: [
@@ -32,6 +45,8 @@ const loginPage = new Window({
         mods: '--centered',
       }),
     ],
+  }, {
+    submit: onSubmit,
   }),
 });
 

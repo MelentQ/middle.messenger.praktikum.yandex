@@ -4,12 +4,17 @@ import { Block } from '../../utils/Block';
 
 type ProfileProps = {
   head: Block[] | string[],
-  content: Block[] | string[]
+  content: Block[] | string[],
+  isForm?: boolean
 }
 
 class Profile extends Block<ProfileProps> {
   constructor(props: ProfileProps, events: { [p: string]: Function } = {}) {
-    super('div', props, { class: 'profile' }, events);
+    if (props.isForm) {
+      super('form', props, { class: 'profile', novalidate: 'true' }, events);
+    } else {
+      super('div', props, { class: 'profile' }, events);
+    }
   }
 
   render() {
