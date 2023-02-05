@@ -44,7 +44,7 @@ class Input extends Block<InputProps> {
   }
 
   removeEvents() {
-    if (this.inputElement && this.props.required) {
+    if (this.inputElement && this.inputElement.required) {
       this.inputElement.removeEventListener('focus', this.focusHandler.bind(this));
       this.inputElement.removeEventListener('blur', this.focusHandler.bind(this));
       this.inputElement.removeEventListener('input', this.focusHandler.bind(this));

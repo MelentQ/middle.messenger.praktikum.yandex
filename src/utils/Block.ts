@@ -22,7 +22,7 @@ abstract class Block<T extends object = {}> {
     settings: BlockSettings;
   };
 
-  props: T;
+  private readonly props: T;
   children: {[p: string]: Block | Block[]};
 
   eventBus: () => EventBus;
@@ -39,6 +39,11 @@ abstract class Block<T extends object = {}> {
     events: { [p: string]: Function } = {},
     settings: BlockSettings = {},
   ) {
+    Object.keys(events).forEach((key) => {
+      // eslint-disable-next-line no-param-reassign
+      events[key] = events[key].bind(this);
+    });
+
     this.meta = {
       tagName,
       propsAndChildren,
@@ -146,14 +151,14 @@ abstract class Block<T extends object = {}> {
   addEvents() {
     Object.entries(this.meta.events).forEach(([name, event]) => {
       // @ts-ignore
-      this._element.addEventListener(name, event.bind(this));
+      this._element.addEventListener(name, event);
     });
   }
 
   removeEvents() {
     Object.entries(this.meta.events).forEach(([name, event]) => {
       // @ts-ignore
-      this._element.removeEventListener(name, event.bind(this));
+      this._element.removeEventListener(name, event);
     });
   }
 
