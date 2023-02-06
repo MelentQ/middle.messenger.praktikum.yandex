@@ -1,0 +1,17 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-rational-order"],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "color-hex-case": "lower",
+    "declaration-empty-line-before": null,
+    "selector-class-pattern": null,
+    "plugin/rational-order": [true, {
+      "empty-line-between-groups": true
+    }]
+  },
+  "ignoreFiles": [
+    "dist/*"
+  ]
+}

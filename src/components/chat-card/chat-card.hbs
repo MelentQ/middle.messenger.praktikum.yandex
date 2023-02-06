@@ -1,0 +1,21 @@
+<div class="chat-card__image-wrapper">
+  {{#if image}}
+    <img src="{{image}}" alt="{{name}}">
+  {{/if}}
+</div>
+<div class="chat-card__text">
+  <h3 class="chat-card__name">{{name}}</h3>
+  {{#if message}}
+    <div class="chat-card__message">
+      {{{message}}}
+    </div>
+  {{/if}}
+</div>
+<div class="chat-card__info">
+  {{#if time}}
+    <time class="chat-card__time">{{time}}</time>
+  {{/if}}
+  {{#if count}}
+    <span class="chat-card__counter">{{count}}</span>
+  {{/if}}
+</div>

@@ -12,21 +12,13 @@
 
   background-color: $grayscale-400;
   border-radius: 50%;
-
   cursor: pointer;
 
-  &:hover {
-    .avatar__overlay {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-
-  &__icon {
+  svg {
     width: 4rem;
     height: 4rem;
 
-    fill: #CDCDCD;
+    fill: #cdcdcd;
   }
 
   &__overlay {
@@ -43,12 +35,19 @@
 
     background-color: rgba(#000, 0.5);
     border-radius: 50%;
-
-    opacity: 0;
     visibility: hidden;
-    user-select: none;
+    opacity: 0;
 
     transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    user-select: none;
+  }
+
+  &:hover {
+    .avatar__overlay {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 
   &__label {

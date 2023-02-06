@@ -1,0 +1,69 @@
+@import "../../scss/variables";
+
+.message {
+  position: relative;
+
+  max-width: 40rem;
+  padding: 1.2rem;
+
+  background-color: $grayscale-300;
+  border-radius: 0 1.2rem 1.2rem;
+
+  &--image {
+    flex-shrink: 0;
+
+    max-width: 32rem;
+    padding: 0;
+
+    overflow: hidden;
+
+    border: 0.1rem solid $grayscale-400;
+    border-radius: 1.2rem;
+
+    img {
+      width: 100%;
+      height: auto;
+
+      object-fit: contain;
+    }
+  }
+
+  &--my {
+    width: fit-content;
+
+    margin-left: auto;
+
+    padding-right: 4.8rem;
+
+    background-color: $primary-100;
+
+    border-radius: 1.2rem 1.2rem 0;
+  }
+
+  &__content {
+    font-size: $t-2;
+  }
+
+  &__time {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 2;
+
+    color: $grayscale-700;
+    font-size: $l-1;
+  }
+
+  &--image .message__time {
+    padding: 0.2rem 0.7rem;
+
+    color: $grayscale-100;
+
+    background: rgb(82 82 82 / 50%);
+    border-radius: 3rem;
+  }
+
+  &--my .message__time {
+    color: $primary-700;
+  }
+}

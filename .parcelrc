@@ -3,6 +3,10 @@
   "reporters":  ["...", "parcel-reporter-static-files-copy"],
   "transformers": {
     "*.hbs": ["@anikin/parcel-transformer-handlebars-precompile"],
-    "*.css": ["@parcel/transformer-sass"]
+    "*.css": ["@parcel/transformer-sass"],
+    "*.svg": ["parcel-transformer-svg-sprite"]
+  },
+  "packagers": {
+    "*.html": "parcel-packager-svg-sprite"
   }
 }

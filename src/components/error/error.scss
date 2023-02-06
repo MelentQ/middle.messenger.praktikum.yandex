@@ -3,14 +3,14 @@
 .error {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 6.8rem;
+  align-items: center;
 
   &__content {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 2rem;
+    align-items: center;
   }
 
   &__code {
@@ -19,8 +19,5 @@
 
   &__text {
     font-size: $h-2;
-  }
-
-  &__actions {
   }
 }

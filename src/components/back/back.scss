@@ -14,17 +14,18 @@
 
   background-color: $primary-100;
 
+  &__icon {
+    width: 2.8rem;
+    height: 2.8rem;
+
+    transition: fill 0.3s ease;
+
+    fill: $primary-700;
+  }
+
   &:hover {
     .back__icon {
       fill: $primary-900;
     }
-  }
-
-  &__icon {
-    width: 2.8rem;
-    height: 2.8rem;
-    fill: $primary-700;
-
-    transition: fill 0.3s ease;
   }
 }

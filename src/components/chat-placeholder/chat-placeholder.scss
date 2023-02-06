@@ -1,0 +1,13 @@
+@import "../../scss/variables";
+
+.chat-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  &__message {
+    color: $grayscale-700;
+    font-size: $t-2;
+  }
+}

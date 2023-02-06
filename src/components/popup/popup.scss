@@ -1,0 +1,45 @@
+@import "../../scss/variables";
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0.8rem 0;
+
+  background: $grayscale-100;
+  border-radius: 1.2rem;
+  box-shadow: 0 0 0.6rem rgb(0 0 0 / 14%);
+
+  &__button {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    width: 100%;
+    min-width: max-content;
+
+    padding: 0.8rem 1.6rem;
+
+    font-size: $t-2;
+
+    background-color: transparent;
+
+    border: none;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $grayscale-400;
+    }
+
+    svg {
+      flex-shrink: 0;
+
+      width: 2.2rem;
+      height: 2.2rem;
+
+      fill: $primary-700;
+    }
+  }
+}

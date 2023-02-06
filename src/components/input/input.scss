@@ -9,32 +9,61 @@
     position: absolute;
     top: 1.5rem;
     left: 0;
+
+    color: $grayscale-700;
+
     transform: translateY(-1.5rem);
     transform-origin: left top;
 
-    color: $grayscale-700;
-    pointer-events: none;
-    user-select: none;
-
     transition: transform 0.3s ease;
+
+    user-select: none;
+    pointer-events: none;
+  }
+
+  &__message {
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+
+    color: $error;
+    font-weight: 400;
+    font-size: $l-2;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    user-select: none;
   }
 
   &__element {
     width: 100%;
     padding: 1.5rem 0 0.7rem;
+
     border: none;
     border-bottom: 0.1rem solid $primary-700;
 
     transition: border-color 0.3s;
 
+    &.invalid ~ .input__message {
+      visibility: visible;
+      opacity: 1;
+    }
+
     &::placeholder {
-      opacity: 0;
       visibility: hidden;
+      opacity: 0;
+
       pointer-events: none;
     }
+
     &:placeholder-shown ~ .input__placeholder {
       transform: translateY(0) scale(1.44);
     }
+
     &:focus ~ .input__placeholder {
       transform: translateY(-1.5rem);
     }
@@ -42,17 +71,5 @@
     &:hover {
       border-color: $primary-900;
     }
-  }
-
-  &__message {
-    position: absolute;
-    left: 0;
-    bottom: -1.5rem;
-
-    color: $error;
-    font-size: $l-2;
-    font-weight: 400;
-
-    user-select: none;
   }
 }

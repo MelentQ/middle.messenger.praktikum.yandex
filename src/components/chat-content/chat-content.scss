@@ -1,0 +1,172 @@
+@import "../../scss/variables";
+
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 1rem 2rem;
+
+    border-bottom: 0.1rem solid $grayscale-400;
+  }
+
+  &__menu {
+    position: relative;
+
+    .popup {
+      position: absolute;
+      top: calc(100% + 2.5rem);
+      right: 0;
+    }
+  }
+
+  &__menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    background-color: transparent;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease;
+
+    svg {
+      width: 0.3rem;
+      height: 1.5rem;
+
+      transition: fill 0.3s ease;
+
+      fill: $grayscale-900;
+    }
+
+    &:hover {
+      background-color: $grayscale-200;
+
+      svg {
+        fill: $primary-700;
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+
+    max-height: calc(100vh - 11rem);
+
+    overflow: auto;
+  }
+
+  &__body-inner {
+    padding: 1rem 2rem;
+  }
+
+  &__footer {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    padding: 1rem 2rem;
+
+    border-top: 0.1rem solid $grayscale-400;
+  }
+
+  &__attach {
+    position: relative;
+
+    .popup {
+      position: absolute;
+      bottom: calc(100% + 2.2rem);
+      left: 0;
+    }
+  }
+
+  &__attach-button {
+    width: 3.2rem;
+    height: 3.2rem;
+
+    padding: 0;
+
+    background-color: transparent;
+    border: none;
+
+    cursor: pointer;
+
+    /* stylelint-disable-next-line  */
+    svg {
+      width: 100%;
+      height: 100%;
+
+      transition: fill 0.3s ease;
+
+      fill: $grayscale-700;
+    }
+
+    &:hover svg {
+      fill: $primary-700;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-grow: 1;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  &__form-input {
+    flex-grow: 1;
+    height: 3.2rem;
+
+    padding: 1rem 2rem;
+
+    background-color: $grayscale-400;
+    border: none;
+
+    border-radius: 3rem;
+  }
+
+  &__form-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0;
+
+    background-color: transparent;
+
+    border: none;
+
+    cursor: pointer;
+
+    /* stylelint-disable-next-line  */
+    svg {
+      transform: rotate(180deg);
+      transform-origin: center center;
+
+      transition: fill 0.3s ease;
+
+      fill: $primary-700;
+    }
+
+    &:hover svg {
+      fill: $primary-900;
+    }
+  }
+}
